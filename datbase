@@ -44,4 +44,5 @@ app.post("/messages", async (req, res) => {
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
-});
+})
+adding data in databse file to refelct that in test branch in github;
