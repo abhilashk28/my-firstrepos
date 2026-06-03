@@ -1,0 +1,28 @@
+// backend.js
+const express = require("express");
+const app = express();
+const PORT = 3000;
+
+// Middleware to parse JSON requests
+app.use(express.json());
+
+// A simple GET route
+app.get("/", (req, res) => {
+  res.send("Welcome to the backend!");
+});
+
+// A GET API that returns JSON
+app.get("/api/message", (req, res) => {
+  res.json({ message: "Hello from the backend!" });
+});
+
+// A POST API example
+app.post("/api/echo", (req, res) => {
+  const { text } = req.body;
+  res.json({ echo: text || "You didn't send any text!" });
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
