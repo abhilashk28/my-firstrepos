@@ -1,0 +1,52 @@
+[200~<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Frontend Example</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f4f4f4;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #0078ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005fd1;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Frontend Demo</h1>
+    <button onclick="showMessage()">Click Me</button>
+
+    <p id="message"></p>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").textContent =
+                "Hello! You clicked the button.";
+        }
+    </script>
+
+</body>
+</html>
