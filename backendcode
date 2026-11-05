@@ -1,30 +1,52 @@
-// backend.js
-const express = require("express");
-const app = express();
-const PORT = 3000;
 
-// Middleware to parse JSON requests
-app.use(express.json());
+from flask import Flask, request, jsonify
 
-// A simple GET route
-app.get("/", (req, res) => {
-  res.send("Welcome to the backend!");
-});
+app = Flask(__name__)
 
-// A GET API that returns JSON
-app.get("/api/message", (req, res) => {
-  res.json({ message: "Hello from the backend!" });
-});
+users = []
 
-// A POST API example
-app.post("/api/echo", (req, res) => {
-  const { text } = req.body;
-  res.json({ echo: text || "You didn't send any text!" });
-});
+# Get all users
+@app.route('/users', methods=['GET'])
+def get_users():
+    return jsonify(users)
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-})
+# Add a new user
+@app.route('/users', methods=['POST'])
+def add_user():
+    data = request.get_json()
 
-addind some more funtional;ity in dev envitoment;
+    user = {
+        "id": len(users) + 1,
+        "name": data["name"],
+        "email": data["email"]
+    }
+
+    users.append(user)
+
+    return jsonify(user), 201
+
+# Get user by ID
+@app.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = next(
+        (u for u in users if u["id"] == user_id),
+        None
+    )
+
+    if user:
+        return jsonify(user)
+
+    return jsonify({"error": "User not found"}), 404
+
+# Delete user
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    global users
+
+    users = [u for u in users if u["id"] != user_id]
+
+    return jsonify({"message": "User deleted"})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
