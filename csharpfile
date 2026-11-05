@@ -1,3 +1,17 @@
+adding some code again 
+#include <stdio.h>
+
+int main() {
+    int num = 7;
+
+    if (num % 2 == 0) {
+        printf("Even Number");
+    } else {
+        printf("Odd Number");
+    }
+
+    return 0;
+}
 #include <stdio.h>
 
 int main() {
